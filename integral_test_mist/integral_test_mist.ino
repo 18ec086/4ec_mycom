@@ -150,8 +150,8 @@ void motor_from_temp(){
     delay(5000);
   }
   else{
-    Serial.println("Senror->elseIfok");
-    pwm_with(0);
+    Serial.println("Senror->elseok");
+    turnOff_fan();
     delay(1000);
   }
 }
@@ -198,7 +198,7 @@ void mistpwm_with(int speed_num){
   int pos=pir_flag;
   temp_LED();
   Serial.println(cel2);
-  Serial.println(pos);
+  //Serial.println(pos);
   if(pos){
     motor_from_temp();
   }
