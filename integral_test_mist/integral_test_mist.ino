@@ -116,13 +116,6 @@ void turnOff_fan(){
 /*-------------------------------------------------
  * 人感フラグ割り込み時の関数
  */
-void pir_rising(){
-  pir_flag=1;
-}
-
-void pir_falling(){
-  pir_flag=0;
-}
 void pir_change(){
   pir_flag=(pir_flag+1)%2;
 }
@@ -188,8 +181,6 @@ void mistpwm_with(int speed_num){
   pinMode(motor3APin,OUTPUT);
   pinMode(motor4APin,OUTPUT); 
   pinMode(pirSensor,INPUT_PULLUP);
-  //attachInterrupt(digitalPinToInterrupt(pirSensor),pir_rising,RISING);
-  //attachInterrupt(digitalPinToInterrupt(pirSensor),pir_falling,FALLING);
   attachInterrupt(digitalPinToInterrupt(pirSensor),pir_change,CHANGE);
 }
 
