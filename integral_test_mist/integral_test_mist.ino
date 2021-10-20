@@ -118,7 +118,6 @@ void turnOff_fan(){
  */
 void pir_change(){
   pir_flag=(pir_flag+1)%2;
-  Serial.println("CHANGE");
 }
 
 /*
@@ -161,14 +160,14 @@ void motor_from_temp(){
  * ミスト関連
  */
 void mistpwm_with(int speed_num){
-  digitalWrite(motor3APin, LOW); // 1Y is set LOW
-  digitalWrite(motor4APin, HIGH); //　2Y is set HIGH
+  digitalWrite(motor3APin, LOW); // 3Y is set LOW
+  digitalWrite(motor4APin, HIGH); //　4Y is set HIGH
   mist_value_motor2 = speed_num; // this has 0~255 
   analogWrite(mistPin, mist_value_motor2);
 }
 void stop_mist(){
-  digitalWrite(motor3APin, LOW); // 1Y is set LOW
-  digitalWrite(motor4APin, LOW); //　2Y is set HIGH 
+  digitalWrite(motor3APin, LOW); // 3Y is set LOW
+  digitalWrite(motor4APin, LOW); //　4Y is set LOW
   analogWrite(mistPin,0);
 }
 
