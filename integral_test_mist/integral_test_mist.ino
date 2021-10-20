@@ -96,12 +96,12 @@ void stop_fan(){
   analogWrite(speedPin, 0); 
 }
 void turnOn_fan(){
-  Serial.println("Senror->ok");
+  //Serial.println("Senror->ok");
   pwm_with(255);
   delay(5000);
 }
 void turnOff_fan(){
-  Serial.println("Sensor->no signal");
+  Serial.println("turn_off,Sensor->no signal");
   stop_fan();
   delay(1000);
 }
@@ -118,6 +118,7 @@ void turnOff_fan(){
  */
 void pir_change(){
   pir_flag=(pir_flag+1)%2;
+  Serial.println("CHANGE");
 }
 
 /*
@@ -134,17 +135,19 @@ void motor_from_temp(){
   if(cel2>=25){
     Serial.println("Senror->Ifok");
     pwm_with(255);
-    mistpwm_with(128);
+    mistpwm_with(255);
     delay(5000);
   }
   else if(cel2>=15){
     Serial.println("Senror->elseIfok");
     pwm_with(156);
+    stop_mist();
     delay(5000);
   }
   else{
     Serial.println("Senror->elseok");
     turnOff_fan();
+    stop_mist();
     delay(1000);
   }
 }
@@ -162,6 +165,11 @@ void mistpwm_with(int speed_num){
   digitalWrite(motor4APin, HIGH); //　2Y is set HIGH
   mist_value_motor2 = speed_num; // this has 0~255 
   analogWrite(mistPin, mist_value_motor2);
+}
+void stop_mist(){
+  digitalWrite(motor3APin, LOW); // 1Y is set LOW
+  digitalWrite(motor4APin, LOW); //　2Y is set HIGH 
+  analogWrite(mistPin,0);
 }
 
 /*
@@ -191,9 +199,13 @@ void mistpwm_with(int speed_num){
   Serial.println(cel2);
   //Serial.println(pos);
   if(pos){
+    //Serial.println("ok");
     motor_from_temp();
   }
   else{
+    //Serial.println("no signal");
     turnOff_fan();
+    stop_mist();
   }
+  delay(100);
 }
