@@ -96,12 +96,10 @@ void stop_fan(){
   analogWrite(speedPin, 0); 
 }
 void turnOn_fan(){
-  //Serial.println("Senror->ok");
   pwm_with(255);
   delay(5000);
 }
 void turnOff_fan(){
-  Serial.println("turn_off,Sensor->no signal");
   stop_fan();
   delay(1000);
 }
@@ -196,13 +194,10 @@ void stop_mist(){
   int pos=pir_flag;
   temp_LED();
   Serial.println(cel2);
-  //Serial.println(pos);
   if(pos){
-    //Serial.println("ok");
     motor_from_temp();
   }
   else{
-    //Serial.println("no signal");
     turnOff_fan();
     stop_mist();
   }
