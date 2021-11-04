@@ -40,7 +40,7 @@ void green(){
 
 void yellow(){
   digitalWrite(LED_R, LOW);
-  digitalWrite(LED_G, LOW);   // 橙=()を点灯しその他を消灯
+  digitalWrite(LED_G, LOW);   // 黄=(赤+緑)を点灯しその他を消灯
   digitalWrite(LED_B, HIGH);
 }
 void white(){
